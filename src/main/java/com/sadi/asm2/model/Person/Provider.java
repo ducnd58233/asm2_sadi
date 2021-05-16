@@ -34,8 +34,6 @@ public class Provider extends Person{
 	}
 	
 	
-	@OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
-	private List<Order> order;
 
 
 	// Setters and Getters
