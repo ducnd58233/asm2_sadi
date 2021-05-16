@@ -2,8 +2,7 @@ package com.sadi.asm2.model.Person;
 
 import javax.persistence.*;
 
-@Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@MappedSuperclass
 public class Person {
 	@Id
 	@Column

@@ -22,10 +22,6 @@ import java.util.Properties;
 @EnableTransactionManagement
 @EnableWebMvc
 public class AppConfig {
-	@Bean
-	public Staff staff() {
-		return new Staff();
-	}
 
     @Bean
     public LocalSessionFactoryBean sessionFactory(){
@@ -40,7 +36,7 @@ public class AppConfig {
 
         LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
 
-        sessionFactoryBean.setPackagesToScan("com.sadi.asm2.models");
+        sessionFactoryBean.setPackagesToScan("com.sadi.asm2.model");
 
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
