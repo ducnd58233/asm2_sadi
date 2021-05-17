@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import com.sadi.asm2.model.Order.Order;
+import com.sadi.asm2.model.Order.Orders;
 
 @Entity
 @Table(name = "provider")
@@ -14,6 +14,10 @@ public class Provider extends Person{
 	
 	@Column
 	private String contact_person;
+	
+	@OneToMany(mappedBy="provider", cascade= CascadeType.ALL,fetch=FetchType.EAGER)
+	private List<Orders> orders;
+	
 	
 	public Provider() {};
 	
@@ -32,9 +36,6 @@ public class Provider extends Person{
 		this.fax = fax;
 		this.contact_person = contact_person;
 	}
-	
-	
-
 
 	// Setters and Getters
 	public String getFax() {
@@ -52,4 +53,6 @@ public class Provider extends Person{
 	public void setContact_person(String contact_person) {
 		this.contact_person = contact_person;
 	}
+
+	
 }

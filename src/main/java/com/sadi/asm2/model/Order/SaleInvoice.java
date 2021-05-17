@@ -1,15 +1,14 @@
-package com.sadi.asm2.model.Production;
+package com.sadi.asm2.model.Order;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
 
-import com.sadi.asm2.model.Order.Order;
-
 
 @Entity
-@Table(name = "sale_invoice")
+@Table(name = "saleInvoice")
 public class SaleInvoice {
 	@Id
 	@Column
@@ -36,10 +35,7 @@ public class SaleInvoice {
 	
 	@Column
 	private Date date;
-	
-	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name="saleInvoice")
-	private Set<Order> orders;
+
 	
 	public SaleInvoice() {
     }
@@ -124,16 +120,6 @@ public class SaleInvoice {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-
-	public Set<Order> getOrders() {
-		return orders;
-	}
-
-	public void setOrders(Set<Order> orders) {
-		this.orders = orders;
-	}
-    
-    
 
     
 }
