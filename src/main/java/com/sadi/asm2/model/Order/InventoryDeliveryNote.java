@@ -1,4 +1,4 @@
-package com.sadi.asm2.model.Production;
+package com.sadi.asm2.model.Order;
 
 import java.util.Date;
 

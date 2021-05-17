@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Entity
 public class OrderDetail {
 	@Id
-	private int orderId;
+	private int id;
 	
 	@Column
 	private int price;
@@ -15,15 +15,15 @@ public class OrderDetail {
 	private int productId;
 	
 	@OneToOne(fetch = FetchType.EAGER)
-	@MapsId
-	private Order order;
+	@JoinColumn(name="order_id")
+	private Orders orders;
 
-	public int getOrderId() {
-		return orderId;
+	public int getId() {
+		return id;
 	}
 
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getPrice() {
@@ -42,12 +42,12 @@ public class OrderDetail {
 		this.productId = productId;
 	}
 
-	public Order getOrder() {
-		return order;
+	public Orders getOrder() {
+		return orders;
 	}
 
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setOrder(Orders orders) {
+		this.orders = orders;
 	}
 	
 	

@@ -26,24 +26,25 @@ public class Product {
 	@Column
 	private String description;
 	
-	@Column
-	private String category;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn (name="category_id",referencedColumnName="id",nullable=false,unique=false)
+    private Category category;
 	
 	@Column
 	private int price;
 	
 	public Product() { super(); }
 	
-	public Product(int id, String name, String model, String brand, String company, String description, String category, int price) {
-		this.id = id;
-		this.name = name;
-		this.model = model;
-		this.brand = brand;
-		this.company = company;
-		this.description = description;
-		this.category = category;
-		this.price = price;
-	}
+//	public Product(int id, String name, String model, String brand, String company, String description, int categoryId, int price) {
+//		this.id = id;
+//		this.name = name;
+//		this.model = model;
+//		this.brand = brand;
+//		this.company = company;
+//		this.description = description;
+//		this.setCategory((Catego));
+//		this.price = price;
+//	}
 	
 	// Getters and Setters
 	
@@ -95,11 +96,11 @@ public class Product {
 		this.description = description;
 	}
 
-	public String getCategory() {
+	public Category getCategory() {
 		return category;
 	}
 
-	public void setCategory(String category) {
+	public void setCategory(Category category) {
 		this.category = category;
 	}
 
