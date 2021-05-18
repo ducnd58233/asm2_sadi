@@ -1,6 +1,13 @@
 package com.sadi.asm2.model.Person;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import javax.persistence.*;
+
+import com.sadi.asm2.model.Order.Orders;
+import com.sadi.asm2.model.Order.SaleInvoice;
 
 @Entity
 @Table(name = "customer")
@@ -10,6 +17,9 @@ public class Customer extends Person{
 	
 	@Column
 	private String contact_person;
+	
+	@OneToMany(targetEntity=SaleInvoice.class, mappedBy="customer", cascade= CascadeType.ALL,fetch=FetchType.EAGER)
+	private Set<SaleInvoice> sale_invoice = new HashSet();
 	
 	public Customer() {};
 	

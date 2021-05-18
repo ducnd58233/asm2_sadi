@@ -13,7 +13,7 @@ import com.sadi.asm2.model.Order.Orders;
 import com.sadi.asm2.service.Order.OrderService;
 
 @RestController
-@RequestMapping(path="order")
+@RequestMapping(path="orders")
 public class OrderController {
 	@Autowired
 	private OrderService orderService;

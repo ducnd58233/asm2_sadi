@@ -1,6 +1,8 @@
 package com.sadi.asm2.model.Production;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,7 +25,7 @@ public class Category {
 	private String name;
 	
 	@OneToMany(mappedBy="category", cascade= CascadeType.ALL,fetch=FetchType.EAGER)
-	private List<Product> product;
+	private Set<Product> product = new HashSet();
 	
 	public Category() {}
 	

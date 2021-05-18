@@ -43,7 +43,7 @@ public class StaffController {
 		currentStaff.setEmail(newStaff.getEmail());
 		currentStaff.setName(newStaff.getName());
 		currentStaff.setPhone(newStaff.getPhone());
-		this.staffService.updateStaff(currentStaff);
+		this.staffService.updateStaff(newStaff);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)

@@ -6,55 +6,34 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.sadi.asm2.model.Person.Customer;
+import com.sadi.asm2.model.Person.Staff;
+
 
 @Entity
-@Table(name = "saleInvoice")
+@Table(name = "sale_invoice")
 public class SaleInvoice {
 	@Id
 	@Column
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column
-	private int staffId;
+	@ManyToOne
+	@JoinColumn (name="staff_id",referencedColumnName="id",nullable=false,unique=false)
+	private Staff staff;
 	
-	@Column
-	private String staffName;
+	@ManyToOne
+	@JoinColumn (name="customer_id",referencedColumnName="id",nullable=false,unique=false)
+	private Customer customer;	
 	
-	@Column
-	private int customerId;
-	
-	@Column
-	private String customerName;
-	
-	@Column
-	private int quantity;
-	
-	@Column
-	private int total;
-	
+//	@OneToOne(mappedBy="sale_invoice")
+//	private SaleInvoiceDetail saleInvoiceDetail;
+
 	@Column
 	private Date date;
 
 	
 	public SaleInvoice() {
-    }
-
-	public SaleInvoice(int staffId, int customerId, int quantity, int total, Date date) {
-        this.staffId = staffId;
-        this.customerId = customerId; 
-        this.quantity = quantity;
-        this.total = total;
-        this.date = date;
-    }
-	
-    public SaleInvoice(int id, int staffId, int customerId, int quantity, int total, Date date) {
-        this.id = id;
-        this.staffId = staffId;
-        this.customerId = customerId; 
-        this.quantity = quantity;
-        this.total = total;
-        this.date = date;
     }
 
 	public int getId() {
@@ -65,52 +44,23 @@ public class SaleInvoice {
 		this.id = id;
 	}
 
-	public int getStaffId() {
-		return staffId;
+	
+	
+
+	public Staff getStaff() {
+		return staff;
 	}
 
-	public void setStaffId(int staffId) {
-		this.staffId = staffId;
+	public void setStaff(Staff staff) {
+		this.staff = staff;
 	}
 
-	public String getStaffName() {
-		return staffName;
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setStaffName(String staffName) {
-		this.staffName = staffName;
-	}
-
-	public int getCustomerId() {
-		return customerId;
-	}
-
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
-	}
-
-	public String getCustomerName() {
-		return customerName;
-	}
-
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
-	public int getTotal() {
-		return total;
-	}
-
-	public void setTotal(int total) {
-		this.total = total;
+	public void setProvider(Customer customer) {
+		this.customer = customer;
 	}
 
 	public Date getDate() {

@@ -30,7 +30,7 @@ public class OrderService {
 	}
 	
 	public List<Orders> getAllOrders() {
-		return this.sessionFactory.getCurrentSession().createQuery("from Order").list();
+		return this.sessionFactory.getCurrentSession().createQuery("from Orders").list();
 	}
 	
 	public Orders getOrder(int id) {
