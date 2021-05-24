@@ -1,6 +1,7 @@
 package com.sadi.asm2.model.Order;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -18,6 +19,9 @@ public class SaleInvoice {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@Column
+	private Date date;
+	
 	@ManyToOne
 	@JoinColumn (name="staff_id",referencedColumnName="id",nullable=false,unique=false)
 	private Staff staff;
@@ -26,13 +30,16 @@ public class SaleInvoice {
 	@JoinColumn (name="customer_id",referencedColumnName="id",nullable=false,unique=false)
 	private Customer customer;	
 	
-//	@OneToOne(mappedBy="sale_invoice")
-//	private SaleInvoiceDetail saleInvoiceDetail;
-
 	@Column
-	private Date date;
-
+    private int total;
 	
+	@OneToMany(targetEntity=SaleInvoiceDetail.class, mappedBy="sale_invoice", cascade= CascadeType.ALL,fetch=FetchType.EAGER)
+	private Set<SaleInvoiceDetail> SaleInvoiceDetail  = new HashSet();
+	
+	@OneToOne(fetch = FetchType.EAGER)
+    private InventoryDeliveryNote idn;
+	
+
 	public SaleInvoice() {
     }
 
@@ -43,9 +50,6 @@ public class SaleInvoice {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	
-	
 
 	public Staff getStaff() {
 		return staff;
@@ -59,8 +63,16 @@ public class SaleInvoice {
 		return customer;
 	}
 
-	public void setProvider(Customer customer) {
+	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}	
+	
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
 	}
 
 	public Date getDate() {
@@ -69,6 +81,22 @@ public class SaleInvoice {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public Set<SaleInvoiceDetail> getSaleInvoiceDetail() {
+		return SaleInvoiceDetail;
+	}
+
+	public void setSaleInvoiceDetail(Set<SaleInvoiceDetail> saleInvoiceDetail) {
+		SaleInvoiceDetail = saleInvoiceDetail;
+	}
+
+	public InventoryDeliveryNote getIdn() {
+		return idn;
+	}
+
+	public void setIdn(InventoryDeliveryNote idn) {
+		this.idn = idn;
 	}
 
     

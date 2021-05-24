@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sadi.asm2.model.Order.Orders;
+import com.sadi.asm2.model.Person.Staff;
 import com.sadi.asm2.service.Order.OrderService;
 
 @RestController
@@ -47,8 +49,13 @@ public class OrderController {
 		this.orderService.deleteOrder(id);
 	}
 	
-	@RequestMapping(path="/seach", method=RequestMethod.POST)
+	@RequestMapping(path="/search", method=RequestMethod.POST)
 	public List<Orders> searchOrder(@RequestBody Orders orders){
 		return this.orderService.searchOrder(orders);
+	}
+	
+	@RequestMapping(path= "/page", method=RequestMethod.GET)
+	public List<Orders> getAllPaginatedOrders(@RequestParam int startRecord, @RequestParam int maxRecords){
+		return this.orderService.getAllPaginatedOrders(startRecord, maxRecords);
 	}
 }

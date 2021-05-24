@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sadi.asm2.model.Order.IRNDetail;
 import com.sadi.asm2.model.Order.InventoryReceivingNote;
 import com.sadi.asm2.model.Order.Orders;
 
@@ -34,6 +35,11 @@ public class IRNService {
 	}
 	
 	public void updateIRN(InventoryReceivingNote irn) {
+		if(irn.getIRNDetail()!=null) {
+			for(IRNDetail irnDetail: irn.getIRNDetail()) {
+				irnDetail.setInventory_receiving_note(irn);
+			}
+		}
 		this.sessionFactory.getCurrentSession().update(irn);
 	}
 	
@@ -45,13 +51,11 @@ public class IRNService {
 	
 	public List<InventoryReceivingNote> searchIRN(InventoryReceivingNote irn){
 		List<InventoryReceivingNote> irnList = this.sessionFactory.getCurrentSession()
-				.createQuery("from InventoryReceivingNote where id= :id or staffId= :staffId or providerId= :providerId or date= :date")
+				.createQuery("from InventoryReceivingNote where id= :id or staff= :staff or date= :date")
 				.setParameter("id", irn.getId())
-				.setParameter("staffId", irn.getStaffId())
-				.setParameter("productId", irn.getProductId())
-//				.setParameter("staff", irn.getStaff().getName())
-//				.setParameter("provider", irn.getProvider().getName())
+				.setParameter("staff", irn.getStaff().getId())
 				.setParameter("date", irn.getDate())
+				.setDate("date", irn.getDate())
 				.list();
 		return irnList;
 	}
@@ -60,8 +64,8 @@ public class IRNService {
 		 
 		 return this.sessionFactory.getCurrentSession()
 				 .createQuery("from InventoryReceivingNote where  date >= :startDate and date <= :endDate")
-				 .setParameter("startDate", startDate)
-	             .setParameter("endDate", endDate)
+				 .setDate("startDate", startDate)
+	             .setDate("endDate", endDate)
 	             .list();
 	}
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sadi.asm2.model.Order.IRNDetail;
 import com.sadi.asm2.model.Order.InventoryReceivingNote;
 import com.sadi.asm2.service.Order.IRNService;
 
@@ -39,16 +40,15 @@ public class IRNController {
 	public void updateIRN(@PathVariable int id, @RequestBody InventoryReceivingNote newIRN) {
 		InventoryReceivingNote currentIRN = this.irnService.getIRN(id);
 		currentIRN.setDate(newIRN.getDate());
-		currentIRN.setProductId(newIRN.getProductId());
-		currentIRN.setStaffId(newIRN.getStaffId());
-		currentIRN.setQuantity(newIRN.getQuantity());
-//		currentIRN.setProvider(newIRN.getProvider());
-//		currentIRN.setStaff(newIRN.getStaff());
+		currentIRN.setStaff(newIRN.getStaff());
+		currentIRN.setOrders(newIRN.getOrders());
+		currentIRN.setIRNDetail(newIRN.getIRNDetail());
+
 		this.irnService.updateIRN(currentIRN);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public void deleteIRN(@PathVariable int id) {
+	public void deleteIRN(@PathVariable int id){
 		this.irnService.deleteIRN(id);
 	}
 	

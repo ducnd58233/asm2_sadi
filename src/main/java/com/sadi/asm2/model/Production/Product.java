@@ -35,16 +35,6 @@ public class Product {
 	
 	public Product() { super(); }
 	
-//	public Product(int id, String name, String model, String brand, String company, String description, int categoryId, int price) {
-//		this.id = id;
-//		this.name = name;
-//		this.model = model;
-//		this.brand = brand;
-//		this.company = company;
-//		this.description = description;
-//		this.setCategory((Catego));
-//		this.price = price;
-//	}
 	
 	// Getters and Setters
 	

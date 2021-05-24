@@ -55,9 +55,9 @@ public class StaffController {
 	public List<Staff> searchStaff(@RequestBody Staff staff) {
 		return this.staffService.searchStaff(staff);
 	}
-//	
-//	@RequestMapping(path= "/page", method=RequestMethod.GET)
-//	public List<Staff> getAllPaginatedStaffs(@RequestParam int startRecord, @RequestParam int maxRecords){
-//		return this.staffService.getAllPaginatedStaffs(startRecord, maxRecords);
-//	}
+	
+	@RequestMapping(path= "/page", method=RequestMethod.GET)
+	public List<Staff> getAllPaginatedStaffs(@RequestParam int startRecord, @RequestParam int maxRecords){
+		return this.staffService.getAllPaginatedStaffs(startRecord, maxRecords);
+	}
 }

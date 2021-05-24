@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
+import com.sadi.asm2.model.Order.OrderDetail;
 import com.sadi.asm2.model.Order.Orders;
 import com.sadi.asm2.model.Person.Customer;
 
@@ -34,10 +35,15 @@ public class OrderService {
 	}
 	
 	public Orders getOrder(int id) {
-		return (Orders) this.sessionFactory.getCurrentSession().get(Orders.class, id);
+		return this.sessionFactory.getCurrentSession().get(Orders.class, id);
 	}
 	
 	public void updateOrder(Orders orders) {
+		if(orders.getOrderDetail()!=null) {
+			for(OrderDetail orderDetail: orders.getOrderDetail()) {
+				orderDetail.setOrders(orders);
+			}
+		}
 		this.sessionFactory.getCurrentSession().update(orders);
 	}
 	
@@ -49,12 +55,24 @@ public class OrderService {
 	
 	public List<Orders> searchOrder(Orders orders){
 		List<Orders> orderList = this.sessionFactory.getCurrentSession()
-				.createQuery("from Order where id= :id or staff= :staff or provider= :provider or date= :date")
+				.createQuery("from Order where id= :id or staff= :staff or staffId= :staffId or provider= :provider or providerId= :providerId or date= :date")
 				.setParameter("id", orders.getId())
 				.setParameter("staff", orders.getStaff().getName())
+				.setParameter("staffId", orders.getStaff().getId())
 				.setParameter("provider", orders.getProvider().getName())
+				.setParameter("providerId", orders.getProvider().getId())
 				.setParameter("date", orders.getDate())
 				.list();
 		return orderList;
+	}
+	
+	public List<Orders> getAllPaginatedOrders(int startRecord, int maxRecords) {
+    	Session session =  this.sessionFactory.getCurrentSession();
+    	Criteria criteria = session.createCriteria(Orders.class);
+    	criteria.setFirstResult(startRecord);
+        criteria.setMaxResults(maxRecords);
+        
+        return (List) criteria.list();
+		  
 	}
 }
