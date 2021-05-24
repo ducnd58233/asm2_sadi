@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sadi.asm2.model.Order.IDNDetail;
 import com.sadi.asm2.model.Order.InventoryDeliveryNote;
 import com.sadi.asm2.model.Order.InventoryReceivingNote;
 import com.sadi.asm2.service.Order.IDNService;
@@ -40,11 +41,8 @@ public class IDNController {
 	public void updateIDN(@PathVariable int id, @RequestBody InventoryDeliveryNote newIDN) {
 		InventoryDeliveryNote currentIDN = this.idnService.getIDN(id);
 		currentIDN.setDate(newIDN.getDate());
-		currentIDN.setProductId(newIDN.getProductId());
-		currentIDN.setStaffId(newIDN.getStaffId());
-		currentIDN.setQuantity(newIDN.getQuantity());
-//		currentIRN.setProvider(newIRN.getProvider());
-//		currentIRN.setStaff(newIRN.getStaff());
+		currentIDN.setStaff(newIDN.getStaff());
+		currentIDN.setIDNDetail(newIDN.getIDNDetail());
 		this.idnService.updateIDN(currentIDN);
 	}
 	
@@ -53,7 +51,7 @@ public class IDNController {
 		this.idnService.deleteIDN(id);
 	}
 	
-	@RequestMapping(path="/seach", method=RequestMethod.POST)
+	@RequestMapping(path="/search", method=RequestMethod.POST)
 	public List<InventoryDeliveryNote> searchIDN(@RequestBody InventoryDeliveryNote idn){
 		return this.idnService.searchIDN(idn);
 	}

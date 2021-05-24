@@ -58,11 +58,11 @@ public class StaffService {
 	}
 	
 	
-//	public List<Staff> getAllPaginatedStaffs(int startRecord, int maxRecords) {
-//		Session session = this.sessionFactory.getCurrentSession();
-//		Criteria criteria = session.createCriteria(Staff.class);
-//		criteria.setFirstResult(startRecord);
-//		criteria.setMaxResults(maxRecords);
-//		return (List) criteria.list();
-//	}
+	public List<Staff> getAllPaginatedStaffs(int startRecord, int maxRecords) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(Staff.class);
+		criteria.setFirstResult(startRecord);
+		criteria.setMaxResults(maxRecords);
+		return (List) criteria.list();
+	}
 }

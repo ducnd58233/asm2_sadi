@@ -9,6 +9,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sadi.asm2.model.Order.IDNDetail;
+import com.sadi.asm2.model.Order.IRNDetail;
 import com.sadi.asm2.model.Order.InventoryDeliveryNote;
 
 @Service
@@ -33,6 +35,11 @@ public class IDNService {
 	}
 	
 	public void updateIDN(InventoryDeliveryNote idn) {
+		if(idn.getIDNDetail()!=null) {
+			for(IDNDetail idnDetail: idn.getIDNDetail()) {
+				idnDetail.setInventory_delivery_note(idn);
+			}
+		}
 		this.sessionFactory.getCurrentSession().update(idn);
 	}
 	
@@ -46,11 +53,9 @@ public class IDNService {
 		List<InventoryDeliveryNote> idnList = this.sessionFactory.getCurrentSession()
 				.createQuery("from InventoryDeliveryNote where id= :id or staffId= :staffId or providerId= :providerId or date= :date")
 				.setParameter("id", idn.getId())
-				.setParameter("staffId", idn.getStaffId())
-				.setParameter("productId", idn.getProductId())
-//				.setParameter("staff", irn.getStaff().getName())
-//				.setParameter("provider", irn.getProvider().getName())
+				.setParameter("staff", idn.getStaff().getId())
 				.setParameter("date", idn.getDate())
+				.setDate("date", idn.getDate())
 				.list();
 		return idnList;
 	}
@@ -59,8 +64,8 @@ public class IDNService {
 		 
 		 return this.sessionFactory.getCurrentSession()
 				 .createQuery("from InventoryDeliveryNote where  date >= :startDate and date <= :endDate")
-				 .setParameter("startDate", startDate)
-	             .setParameter("endDate", endDate)
+				 .setDate("startDate", startDate)
+	             .setDate("endDate", endDate)
 	             .list();
 	}
 }

@@ -2,22 +2,29 @@ package com.sadi.asm2.model.Order;
 
 import javax.persistence.*;
 
+import com.sadi.asm2.model.Production.Product;
+
 
 @Entity
+@Table(name="order_detail")
 public class OrderDetail {
 	@Id
-	private int id;
-	
-	@Column
-	private int price;
-	
-	@Column
-	private int productId;
-	
+    private int id;
+	 
 	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="order_id")
-	private Orders orders;
+	@JoinColumn(name="product_id", nullable = false)
+	private Product product;
 
+    @Column
+    private int quantity;
+
+    @Column
+    private int price;
+
+    @ManyToOne
+	@JoinColumn (name="order_id",referencedColumnName="id",nullable=false,unique=false)
+    private Orders orders;
+    
 	public int getId() {
 		return id;
 	}
@@ -34,19 +41,27 @@ public class OrderDetail {
 		this.price = price;
 	}
 
-	public int getProductId() {
-		return productId;
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setProductId(int productId) {
-		this.productId = productId;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
-	public Orders getOrder() {
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public Orders getOrders() {
 		return orders;
 	}
 
-	public void setOrder(Orders orders) {
+	public void setOrders(Orders orders) {
 		this.orders = orders;
 	}
 	

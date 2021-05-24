@@ -1,5 +1,8 @@
 package com.sadi.asm2.model.Order;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.*;
 
 import com.sadi.asm2.model.Person.Provider;
@@ -17,8 +20,8 @@ public class Orders {
 	@Column
 	private String date;
 	
-	@OneToOne(mappedBy="orders")
-	private OrderDetail orderDetail;
+	@OneToMany(targetEntity=OrderDetail.class, mappedBy="orders", cascade= CascadeType.ALL,fetch=FetchType.EAGER)
+	private Set<OrderDetail> orderDetail  = new HashSet();
 
 	@ManyToOne
 	@JoinColumn (name="staff_id",referencedColumnName="id",nullable=false,unique=false)
@@ -42,6 +45,15 @@ public class Orders {
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+	
+
+	public Set<OrderDetail> getOrderDetail() {
+		return orderDetail;
+	}
+
+	public void setOrderDetail(Set<OrderDetail> orderDetail) {
+		this.orderDetail = orderDetail;
 	}
 
 	public Staff getStaff() {

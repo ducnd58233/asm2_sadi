@@ -6,7 +6,6 @@ import java.util.Set;
 
 import javax.persistence.*;
 
-import com.sadi.asm2.model.Order.Orders;
 import com.sadi.asm2.model.Order.SaleInvoice;
 
 @Entity
@@ -19,7 +18,7 @@ public class Customer extends Person{
 	private String contact_person;
 	
 	@OneToMany(targetEntity=SaleInvoice.class, mappedBy="customer", cascade= CascadeType.ALL,fetch=FetchType.EAGER)
-	private Set<SaleInvoice> sale_invoice = new HashSet();
+	private Set<SaleInvoice> sale_invoice  = new HashSet();
 	
 	public Customer() {};
 	
