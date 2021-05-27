@@ -51,9 +51,10 @@ public class IRNService {
 	
 	public List<InventoryReceivingNote> searchIRN(InventoryReceivingNote irn){
 		List<InventoryReceivingNote> irnList = this.sessionFactory.getCurrentSession()
-				.createQuery("from InventoryReceivingNote where id= :id or staff= :staff or date= :date")
-				.setParameter("id", irn.getId())
-				.setParameter("staff", irn.getStaff().getId())
+				.createQuery("from InventoryReceivingNote where id= :id or staff= :staff or staffId= :staffId or date= :date")
+				.setInteger("id", irn.getId())
+				.setInteger("staffId", irn.getStaff().getId())
+				.setString("staff", irn.getStaff().getName())
 				.setParameter("date", irn.getDate())
 				.setDate("date", irn.getDate())
 				.list();

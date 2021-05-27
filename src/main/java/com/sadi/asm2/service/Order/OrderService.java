@@ -57,11 +57,11 @@ public class OrderService {
 		List<Orders> orderList = this.sessionFactory.getCurrentSession()
 				.createQuery("from Order where id= :id or staff= :staff or staffId= :staffId or provider= :provider or providerId= :providerId or date= :date")
 				.setParameter("id", orders.getId())
-				.setParameter("staff", orders.getStaff().getName())
-				.setParameter("staffId", orders.getStaff().getId())
-				.setParameter("provider", orders.getProvider().getName())
-				.setParameter("providerId", orders.getProvider().getId())
-				.setParameter("date", orders.getDate())
+				.setString("staff", orders.getStaff().getName())
+				.setInteger("staffId", orders.getStaff().getId())
+				.setString("provider", orders.getProvider().getName())
+				.setInteger("providerId", orders.getProvider().getId())
+				.setDate("date", orders.getDate())
 				.list();
 		return orderList;
 	}

@@ -24,17 +24,17 @@ public class ProductController {
 		return this.productService.createProduct(product);
 	}
 
-	@RequestMapping(path = "", method = { RequestMethod.GET })
+	@RequestMapping(path = "", method = RequestMethod.GET )
 	public List<Product> getAllProducts() {
 		return this.productService.getAllProducts();
 	}
 
-	@RequestMapping(value = "/{id}", method = { RequestMethod.GET })
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET )
 	public Product getProduct(@PathVariable int id) {
 		return this.productService.getProduct(id);
 	}
 	
-	@RequestMapping(value="/{id}", method = { RequestMethod.PUT })
+	@RequestMapping(value="/{id}", method = RequestMethod.PUT )
 	public void updateProduct(@PathVariable int id, @RequestBody Product newProduct) {
 		Product currentProduct = this.getProduct(id);
 		currentProduct.setBrand(newProduct.getBrand());
@@ -47,19 +47,19 @@ public class ProductController {
 		this.productService.updateProduct(currentProduct);
 	}
 
-	@RequestMapping(value =  "/{id}", method = { RequestMethod.DELETE })
+	@RequestMapping(value =  "/{id}", method = RequestMethod.DELETE )
 	public void deleteProduct(@PathVariable int id) {
 		this.productService.deleteProduct(id);
 	}
 
 	
-	@RequestMapping(path = "/search", method = { RequestMethod.POST })
+	@RequestMapping(path = "/search", method = RequestMethod.POST )
 	public List<Product> searchProduct(@RequestBody Product product) {
 		return this.productService.searchProduct(product);
 
 	}
 	
-	@RequestMapping(path = "/page", method = { RequestMethod.GET })
+	@RequestMapping(path = "/page", method = RequestMethod.GET )
 	public List<Product> getAllPaginatedProduct(@RequestParam int startRecord, @RequestParam int maxRecords) {
 		return this.productService.getAllPaginatedProduct(startRecord, maxRecords);
 	}

@@ -48,19 +48,19 @@ public class CustomerService {
 	public List<Customer> searchCustomer(Customer customer){
 		List<Customer> customerList = this.sessionFactory.getCurrentSession()
 				.createQuery("from Customer where id= :id or name= :name or address= :address or phone= :phone or fax= :fax or email= :email")
-				.setParameter("id", customer.getId())
-				.setParameter("name", customer.getName())
-				.setParameter("address", customer.getAddress())
-				.setParameter("phone", customer.getPhone())
+				.setInteger("id", customer.getId())
+				.setString("name", customer.getName())
+				.setString("address", customer.getAddress())
+				.setString("phone", customer.getPhone())
 				.list();
 		return customerList;
 	}
 
-//	public List<Customer> getAllPaginatedCustomers(int startRecord, int maxRecords) {
-//		Session session = this.sessionFactory.getCurrentSession();
-//		Criteria criteria = session.createCriteria(Customer.class);
-//		criteria.setFirstResult(startRecord);
-//		criteria.setMaxResults(maxRecords);
-//		return (List) criteria.list();
-//	}
+	public List<Customer> getAllPaginatedCustomers(int startRecord, int maxRecords) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(Customer.class);
+		criteria.setFirstResult(startRecord);
+		criteria.setMaxResults(maxRecords);
+		return (List) criteria.list();
+	}
 }

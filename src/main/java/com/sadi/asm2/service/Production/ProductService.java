@@ -47,14 +47,14 @@ public class ProductService {
 	public List<Product> searchProduct(Product product) {
 		List<Product> productList = this.sessionFactory.getCurrentSession()
 				.createQuery("from Product where id= :id  or company= :company or name= :name or model= :model or brand= :brand or price= :price or description= :description or category= :category ") 
-				 .setParameter("id", product.getId())
-				 .setParameter("name", product.getName())
-				 .setParameter("model", product.getModel())
-				 .setParameter("brand", product.getBrand())
-				 .setParameter("company", product.getCompany())
-				 .setParameter("description", product.getDescription())
-				 .setParameter("category", product.getCategory())
-				 .setParameter("price", product.getPrice())
+				 .setInteger("id", product.getId())
+				 .setString("name", product.getName())
+				 .setString("model", product.getModel())
+				 .setString("brand", product.getBrand())
+				 .setString("company", product.getCompany())
+				 .setString("description", product.getDescription())
+//				 .setParameter("category", product.getCategory())
+				 .setInteger("price", product.getPrice())
 				.list();
 		
 		return productList;

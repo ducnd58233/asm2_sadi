@@ -52,9 +52,8 @@ public class IDNService {
 	public List<InventoryDeliveryNote> searchIDN(InventoryDeliveryNote idn){
 		List<InventoryDeliveryNote> idnList = this.sessionFactory.getCurrentSession()
 				.createQuery("from InventoryDeliveryNote where id= :id or staffId= :staffId or providerId= :providerId or date= :date")
-				.setParameter("id", idn.getId())
-				.setParameter("staff", idn.getStaff().getId())
-				.setParameter("date", idn.getDate())
+				.setInteger("id", idn.getId())
+				.setParameter("staffId", idn.getStaff().getId())
 				.setDate("date", idn.getDate())
 				.list();
 		return idnList;

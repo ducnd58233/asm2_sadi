@@ -46,10 +46,10 @@ public class ProviderService {
 	public List<Provider> searchProvider(Provider provider){
 		List<Provider> providerList = this.sessionFactory.getCurrentSession()
 				.createQuery("from Provider where id= :id or name= :name or address= :address or phone= :phone or fax= :fax or email= :email")
-				.setParameter("id", provider.getId())
-				.setParameter("name", provider.getName())
-				.setParameter("address", provider.getAddress())
-				.setParameter("phone", provider.getPhone())
+				.setInteger("id", provider.getId())
+				.setString("name", provider.getName())
+				.setString("address", provider.getAddress())
+				.setString("phone", provider.getPhone())
 				.list();
 		return providerList;
 	}
