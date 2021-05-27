@@ -46,6 +46,7 @@ public class Product {
 		this.id = id;
 	}
 
+
 	public String getName() {
 		return name;
 	}
@@ -53,6 +54,7 @@ public class Product {
 	public void setName(String name) {
 		this.name = name;
 	}
+
 
 	public String getModel() {
 		return model;
@@ -94,6 +96,10 @@ public class Product {
 		this.category = category;
 	}
 
+	public int getCategoryId() {
+		return this.getCategory().getId();
+	}
+	
 	public int getPrice() {
 		return price;
 	}

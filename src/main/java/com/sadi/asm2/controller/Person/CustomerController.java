@@ -56,8 +56,8 @@ public class CustomerController {
 		return this.customerService.searchCustomer(customer);
 	}
 	
-//	@RequestMapping(path= "/page", method=RequestMethod.GET)
-//	public List<Customer> getAllPaginatedCustomers(@RequestParam int startRecord, @RequestParam int maxRecords){
-//		return this.customerService.getAllPaginatedCustomers(startRecord, maxRecords);
-//	}
+	@RequestMapping(path= "/page", method=RequestMethod.GET)
+	public List<Customer> getAllPaginatedCustomers(@RequestParam int startRecord, @RequestParam int maxRecords){
+		return this.customerService.getAllPaginatedCustomers(startRecord, maxRecords);
+	}
 }

@@ -46,10 +46,10 @@ public class OrderDetailService {
 	public List<OrderDetail> searchOrderDetail(OrderDetail orderDetail){
 		List<OrderDetail> orderDetailList = this.sessionFactory.getCurrentSession()
 				.createQuery("from OrderDetail where id= :id or product= :product or productId= :productId or price= :price")
-				.setParameter("id", orderDetail.getId())
-				.setParameter("product", orderDetail.getProduct().getName())
-				.setParameter("productId", orderDetail.getProduct().getId())
-				.setParameter("price", orderDetail.getPrice())
+				.setInteger("id", orderDetail.getId())
+				.setString("product", orderDetail.getProduct().getName())
+				.setInteger("productId", orderDetail.getProduct().getId())
+				.setInteger("price", orderDetail.getPrice())
 				.list();
 		return orderDetailList;
 	}

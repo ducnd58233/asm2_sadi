@@ -47,9 +47,9 @@ public class IDNDetailService {
 	public List<IDNDetail> searchIDNDetail(IDNDetail idnDetail){
 		List<IDNDetail> idnDetailList = this.sessionFactory.getCurrentSession()
 				.createQuery("from IDNDetail where id= :id or idn= :idn or quantity= :quantity")
-				.setParameter("id", idnDetail.getId())
-				.setParameter("idn", idnDetail.getInventory_delivery_note())
-				.setParameter("quantity", idnDetail.getQuantity())
+				.setInteger("id", idnDetail.getId())
+				.setInteger("idn", idnDetail.getInventory_delivery_note().getId())
+				.setInteger("quantity", idnDetail.getQuantity())
 				.list();
 		return idnDetailList;
 	}

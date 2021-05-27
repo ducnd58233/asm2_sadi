@@ -48,9 +48,9 @@ public class IRNDetailService {
 	public List<IRNDetail> searchIRNDetail(IRNDetail irnDetail){
 		List<IRNDetail> irnDetailList = this.sessionFactory.getCurrentSession()
 				.createQuery("from IRNDetail where id= :id or irn= :irn or quantity= :quantity")
-				.setParameter("id", irnDetail.getId())
-				.setParameter("irn", irnDetail.getInventory_receiving_note())
-				.setParameter("quantity", irnDetail.getQuantity())
+				.setInteger("id", irnDetail.getId())
+				.setInteger("irn", irnDetail.getInventory_receiving_note().getId())
+				.setInteger("quantity", irnDetail.getQuantity())
 				.list();
 		return irnDetailList;
 	}

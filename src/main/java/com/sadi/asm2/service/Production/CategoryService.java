@@ -47,8 +47,8 @@ public class CategoryService {
 
 		List<Category> categoryList = this.sessionFactory.getCurrentSession()
 				.createQuery("from Category where id=:id or name like :name")
-				.setParameter("id", category.getId())
-				.setParameter("name", "%" + category.getName() + "%").list();
+				.setInteger("id", category.getId())
+				.setString("name", "%" + category.getName() + "%").list();
 		return categoryList;
 	}
 	

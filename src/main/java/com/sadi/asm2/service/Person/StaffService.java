@@ -47,11 +47,11 @@ public class StaffService {
 	public List<Staff> searchStaff(Staff staff){
 		List<Staff> staffList = this.sessionFactory.getCurrentSession()
 				.createQuery("from Staff where id= :id or name= :name or address= :address or phone= :phone or email= :email")
-				.setParameter("id", staff.getId())
-				.setParameter("name", staff.getName())
-				.setParameter("address", staff.getAddress())
-				.setParameter("phone", staff.getPhone())
-				.setParameter("email", staff.getEmail())
+				.setInteger("id", staff.getId())
+				.setString("name", staff.getName())
+				.setString("address", staff.getAddress())
+				.setString("phone", staff.getPhone())
+				.setString("email", staff.getEmail())
 				.list();
 		
 		return staffList;

@@ -48,12 +48,12 @@ public class SaleDetailService {
 	public List<SaleInvoiceDetail> searchSaleInvoiceDetail(SaleInvoiceDetail saleInvoiceDetail) {
 		 List<SaleInvoiceDetail> saleInvoiceDetailList = this.sessionFactory.getCurrentSession()
 					.createQuery("from SaleInvoiceDetail where id=:id or product=:product or productId=:productId or quantity=:quantity  or price=:price or saleInvoiceId=:saleInvoiceId") 
-					 .setParameter("id", saleInvoiceDetail.getId())
-					 .setParameter("productId", saleInvoiceDetail.getProduct().getId())
-					 .setParameter("product", saleInvoiceDetail.getProduct().getName())
-					 .setParameter("quantity", saleInvoiceDetail.getQuantity()) 
-					 .setParameter("price", saleInvoiceDetail.getPrice())
-					 .setParameter("saleInvoiceId", saleInvoiceDetail.getSaleInvoice().getId())					
+					 .setInteger("id", saleInvoiceDetail.getId())
+					 .setInteger("productId", saleInvoiceDetail.getProduct().getId())
+					 .setString("product", saleInvoiceDetail.getProduct().getName())
+					 .setInteger("quantity", saleInvoiceDetail.getQuantity()) 
+					 .setInteger("price", saleInvoiceDetail.getPrice())
+					 .setInteger("saleInvoiceId", saleInvoiceDetail.getSaleInvoice().getId())					
 					.list();
 			
 			return saleInvoiceDetailList;

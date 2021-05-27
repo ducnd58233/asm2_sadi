@@ -1,5 +1,6 @@
 package com.sadi.asm2.model.Order;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,7 +19,7 @@ public class Orders {
 	private int id;
 	
 	@Column
-	private String date;
+	private Date date;
 	
 	@OneToMany(targetEntity=OrderDetail.class, mappedBy="orders", cascade= CascadeType.ALL,fetch=FetchType.EAGER)
 	private Set<OrderDetail> orderDetail  = new HashSet();
@@ -39,11 +40,11 @@ public class Orders {
 		this.id = id;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	
